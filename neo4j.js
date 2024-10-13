@@ -19,3 +19,4 @@ export const getDriver = async () => {
 module.exports = [
     getDriver
 ]
+exports.getDriver = getDriver;
