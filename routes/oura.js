@@ -59,7 +59,15 @@ router.post('/', async function(req, res, next) {
   } else { 
     console.log(req.body.transaction.outputs);
     for (var input of req.body.transaction.inputs) { 
-      console.log(input);
+      const r1 = await driver.executeQuery(`
+        MATCH p=()-[r:AFFIRMS {txHash: $txhash}]->() 
+        DELETE r
+        `,
+        {txHash: input.tx_id},
+        { database: 'neo4j' }
+      )
+      console.log(r1);
+      
     }
   } 
   res.send('respond with a resource');
