@@ -7,6 +7,7 @@ router.post('/', function(req, res, next) {
   let target;
   let source;
   let mint = req.body.transaction.mint[0];
+  
   if (mint.quantity==1) { 
     
     for (var output of req.body.transaction.outputs) { 
@@ -24,7 +25,9 @@ router.post('/', function(req, res, next) {
         //stake = address.asReward().toAddress();
         if (stakeAddress) {
           target=stakeAddress.toString();
-          source = new cardano.StakeAddress(network, mint.asset ).toString();
+          var hash = new cardano.Hash28();
+          console.log(hash);
+          source = new cardano.StakeAddress(network, hash ).toString();
           break;
         }
         
