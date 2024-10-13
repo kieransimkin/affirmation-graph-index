@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
         //stake = address.asReward().toAddress();
         if (stakeAddress) {
           target=stakeAddress.toString();
-          var hash = new cardano.Hash28();
+          var hash = new cardano.Hash28(mint.asset);
           console.log(hash);
           source = new cardano.StakeAddress(network, hash ).toString();
           break;
