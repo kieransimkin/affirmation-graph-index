@@ -47,6 +47,15 @@ router.post('/', async function(req, res, next) {
 
     }
     console.log([target,source])
+    const r1 = await driver.executeQuery(`
+      MERGE (s:Wallet {stake: $source})
+      MERGE (t:Wallet {stake: $target})
+      MERGE (s)-[:AFFIRMS {txHash: $txHash }]->(t)
+      `,
+       { source,target, txHash: req.body.transaction.hash },
+       { database: 'neo4j' }
+    )
+    console.log(r1);
   } else { 
     console.log(req.body.transaction.outputs);
     for (var input of req.body.transaction.inputs) { 
