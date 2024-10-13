@@ -60,7 +60,7 @@ router.post('/', async function(req, res, next) {
     console.log(req.body.transaction.outputs);
     for (var input of req.body.transaction.inputs) { 
       const r1 = await driver.executeQuery(`
-        MATCH p=()-[r:AFFIRMS {txHash: $txhash}]->() 
+        MATCH p=()-[r:AFFIRMS {txHash: $txHash}]->() 
         DELETE r
         `,
         {txHash: input.tx_id},
