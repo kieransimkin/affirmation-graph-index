@@ -16,6 +16,6 @@ const getDriver = async () => {
   }
   return driver;
 }
-exports = [
+module.exports = [
     getDriver
 ]
