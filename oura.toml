@@ -12,7 +12,7 @@ predicate = "all_of"
 
 [[filters.check.argument]]
 predicate = "variant_in"
-argument = ["Transaction", "Mint"]
+argument = ["Transaction"]
 
 [[filters.check.argument]]
 predicate = "policy_equals"
