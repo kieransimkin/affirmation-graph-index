@@ -12,8 +12,9 @@ router.post('/', function(req, res, next) {
       address = cardano.Address.fromString(output.address);
       console.log(address);
       var stakeKey = address.stakeCreds;
+      console.log(stakeKey);
       var network = address.network;
-      var stakeAddress = new cardano.StakeAddress(network, stakeKey);
+      var stakeAddress = new cardano.StakeAddress(network, stakeKey.hash);
       //stake = address.asReward().toAddress();
       
       console.log(stakeAddress.toString());
