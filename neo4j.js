@@ -2,7 +2,7 @@ var  dotenv = require('dotenv');
 dotenv.config()
 var neo4j = require('neo4j-driver');
 let driver = null;
-const getDriver = async () => {
+export const getDriver = async () => {
   // URI examples: 'neo4j://localhost', 'neo4j+s://xxx.databases.neo4j.io'
   if (driver) return driver;
 
