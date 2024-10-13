@@ -5,6 +5,7 @@ var cardano = require('@cardano-sdk/core')
 router.post('/', function(req, res, next) {
   console.log(req.body);
   for (var output of req.body.transaction.outputs) { 
+    console.log(output);
     var address = cardano.Cardano.Address.fromBech32(output.address);
     console.log(address);
     var stakeKey = address.getStakeCredential();

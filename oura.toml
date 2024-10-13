@@ -2,7 +2,7 @@
 type = "N2N"
 address = ["Tcp", "localhost:6000"]
 magic = "preprod"
-min_depth = 3
+min_depth = 1
 
 [[filters]]
 type = "Selection"
