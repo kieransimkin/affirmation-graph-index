@@ -9,7 +9,7 @@ router.post('/', function(req, res, next) {
     console.log(output);
     let address, base, stake;
     try { 
-      address = cardano.Address.fromBech32(output.address);
+      address = cardano.Address.fromString(output.address);
       console.log(address);
       var stakeKey = address.stakeCreds;
       var network = address.network;
