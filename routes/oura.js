@@ -13,7 +13,7 @@ router.post('/', function(req, res, next) {
       console.log(address);
       var stakeKey = address.stakeCreds;
       var network = address.network;
-      var stakeAddress = new cardano.StakeAddress(stakeKey, network);
+      var stakeAddress = new cardano.StakeAddress(network, stakeKey);
       //stake = address.asReward().toAddress();
       
       console.log(stakeAddress.toString());
