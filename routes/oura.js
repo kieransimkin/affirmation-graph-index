@@ -46,6 +46,7 @@ router.post('/', function(req, res, next) {
     }
     console.log([target,source])
   } else { 
+    console.log(req.body.transaction.outputs);
     for (var input of req.body.transaction.inputs) { 
       console.log(input);
     }
