@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var cardano = require('@harmoniclabs/cardano-ledger-ts');
+var neo4j = require('../neo4j.js')
 /* GET users listing. */
-router.post('/', function(req, res, next) {
+router.post('/', async function(req, res, next) {
+  const driver = await neo4j.getDriver();
   console.log(req.body.transaction.mint);
   let target;
   let source;
