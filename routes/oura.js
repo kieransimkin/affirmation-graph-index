@@ -1,20 +1,22 @@
 var express = require('express');
 var router = express.Router();
-var cardano = require('@cardano-sdk/core')
+var cardano = require('@harmoniclabs/cardano-ledger-ts');
 /* GET users listing. */
 router.post('/', function(req, res, next) {
   console.log(req.body);
+  
   for (var output of req.body.transaction.outputs) { 
     console.log(output);
     let address, base, stake;
     try { 
-      address = cardano.Cardano.Address.fromBech32(output.address);
-      base = address.asBase()
-      var stakeKey = base.getStakeCredential();
-      var stakeAddress = cardano.Cardano.RewardAddress.fromCredentials(address.getNetworkId(), stakeKey);
+      address = cardano.Address.fromBech32(output.address);
+      console.log(address);
+      var stakeKey = address.stakeCreds;
+      var network = address.network;
+      var stakeAddress = new cardano.StakeAddress(stakeKey, network);
       //stake = address.asReward().toAddress();
       
-      console.log(stakeAddress.toBech32());
+      console.log(stakeAddress.toString());
 
       
     } catch (e) { 
