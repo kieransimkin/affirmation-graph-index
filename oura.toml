@@ -24,7 +24,7 @@ include_transaction_details = true
 
 [sink]
 type = "Webhook"
-url = "http://localhost:3000/oura"
+url = "http://localhost:3000/oura/"
 error_policy = "Continue"
 
 
