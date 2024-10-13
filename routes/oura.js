@@ -10,16 +10,18 @@ router.post('/', function(req, res, next) {
     try { 
       address = cardano.Cardano.Address.fromBech32(output.address);
       base = address.asBase()
-      stake = address.asReward().toAddress();
-      console.log(address.toBech32());
-      console.log(stake.toBech32());
+      var stakeKey = base.getStakeCredential();
+      var stakeAddress = cardano.Cardano.RewardAddress.fromCredentials(address.getNetworkId(), stakeKey);
+      //stake = address.asReward().toAddress();
       
+      console.log(stakeAddress.toBech32());
+
       
     } catch (e) { 
       console.log(e)
     }
     
-    //var stakeKey = address.getStakeCredential();
+    //
     //console.log(stakeKey);
     //var stakeAddress = cardano.Cardano.RewardAddress.fromCredentials(address.getNetworkId(), stakeKey);
     //console.log(stakeAddress);
