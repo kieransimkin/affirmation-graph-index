@@ -4,6 +4,7 @@ var neo4j = require('neo4j-driver');
 let driver = null;
 const getDriver = async () => {
   // URI examples: 'neo4j://localhost', 'neo4j+s://xxx.databases.neo4j.io'
+  console.log(process.env.NEO4J_URI)
   if (driver) return driver;
 
   try {
