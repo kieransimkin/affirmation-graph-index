@@ -6,17 +6,24 @@ router.post('/', function(req, res, next) {
   console.log(req.body);
   for (var output of req.body.transaction.outputs) { 
     console.log(output);
+    let address, base, stake;
     try { 
-    var address = cardano.Cardano.BaseAddress.fromBech32(output.address);
+      address = cardano.Cardano.Address.fromBech32(output.address);
+      base = address.asBase()
+      stake = address.asReward().toAddress();
+      console.log(address.toBech32());
+      console.log(stake.toBech32());
+      
+      
     } catch (e) { 
       console.log(e)
     }
-    console.log(address.toBech32());
-    var stakeKey = address.getStakeCredential();
-    console.log(stakeKey);
-    var stakeAddress = cardano.Cardano.RewardAddress.fromCredentials(address.getNetworkId(), stakeKey);
-    console.log(stakeAddress);
-    console.log(output);
+    
+    //var stakeKey = address.getStakeCredential();
+    //console.log(stakeKey);
+    //var stakeAddress = cardano.Cardano.RewardAddress.fromCredentials(address.getNetworkId(), stakeKey);
+    //console.log(stakeAddress);
+    //console.log(output);
 
   }
   
