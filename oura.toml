@@ -2,6 +2,23 @@
 type = "N2N"
 address = ["Tcp", "localhost:6000"]
 magic = "preprod"
+min_depth = 6
+
+
+[filters.check]
+predicate = "all_of"
+
+[[filters.check.argument]]
+predicate = "variant_in"
+argument = ["Transaction"]
+
+[[filters.check.argument]]
+predicate = "policy_equals"
+argument = "bdc16c0437b25cc7d9addd100cfeb211d8e7fceb14a12c794feca824"
+
+[source.mapper]
+include_transaction_details = true
+
 
 [sink]
 type = "Terminal"
