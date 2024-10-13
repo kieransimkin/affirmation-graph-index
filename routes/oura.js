@@ -4,34 +4,49 @@ var cardano = require('@harmoniclabs/cardano-ledger-ts');
 /* GET users listing. */
 router.post('/', function(req, res, next) {
   console.log(req.body.transaction.mint);
-  
-  for (var output of req.body.transaction.outputs) { 
+  let target;
+  let source;
+  let mint = req.body.transaction.mint[0];
+  if (mint.quantity==1) { 
     
-    let address, base, stake;
-    try { 
-      address = cardano.Address.fromString(output.address);
-      console.log(address);
-      var stakeKey = address.stakeCreds;
-      console.log(stakeKey);
-      var network = address.network;
-      var stakeAddress = new cardano.StakeAddress(network, stakeKey.hash);
-      //stake = address.asReward().toAddress();
+    for (var output of req.body.transaction.outputs) { 
       
-      console.log(stakeAddress.toString());
+      let address, base, stake;
+      try { 
+        address = cardano.Address.fromString(output.address);
+        console.log(address);
+        var stakeKey = address?.stakeCreds;
+        if (!stakeKey) continue;
+        console.log(stakeKey);
+        var network = address.network;
+        var stakeAddress = new cardano.StakeAddress(network, stakeKey.hash);
 
+        //stake = address.asReward().toAddress();
+        if (stakeAddress) {
+          target=stakeAddress.toString();
+          source = new cardano.StakeAddress(network, mint.asset ).toString();
+          break;
+        }
+        
+
+        
+      } catch (e) { 
+        console.log(e)
+      }
       
-    } catch (e) { 
-      console.log(e)
+      //
+      //console.log(stakeKey);
+      //var stakeAddress = cardano.Cardano.RewardAddress.fromCredentials(address.getNetworkId(), stakeKey);
+      //console.log(stakeAddress);
+      //console.log(output);
+
     }
-    
-    //
-    //console.log(stakeKey);
-    //var stakeAddress = cardano.Cardano.RewardAddress.fromCredentials(address.getNetworkId(), stakeKey);
-    //console.log(stakeAddress);
-    //console.log(output);
-
-  }
-  
+    console.log([target,source])
+  } else { 
+    for (var input of req.body.transaction.inputs) { 
+      console.log(input);
+    }
+  } 
   res.send('respond with a resource');
 });
 
