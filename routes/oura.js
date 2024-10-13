@@ -3,10 +3,10 @@ var router = express.Router();
 var cardano = require('@harmoniclabs/cardano-ledger-ts');
 /* GET users listing. */
 router.post('/', function(req, res, next) {
-  console.log(req.body);
+  console.log(req.body.transaction.mint);
   
   for (var output of req.body.transaction.outputs) { 
-    console.log(output);
+    
     let address, base, stake;
     try { 
       address = cardano.Address.fromString(output.address);
