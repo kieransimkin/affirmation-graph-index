@@ -4,6 +4,8 @@ address = ["Tcp", "localhost:6000"]
 magic = "preprod"
 min_depth = 6
 
+[[filters]]
+type = "Selection"
 
 [filters.check]
 predicate = "all_of"
