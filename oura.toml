@@ -2,7 +2,7 @@
 type = "N2N"
 address = ["Tcp", "localhost:6000"]
 magic = "preprod"
-min_depth = 6
+min_depth = 3
 
 [[filters]]
 type = "Selection"
@@ -23,9 +23,9 @@ include_transaction_details = true
 
 
 [sink]
-type = "Terminal"
-throttle_min_span_millis = 500
-wrap = false
+type = "Webhook"
+url = "http://localhost:3000/oura"
+error_policy = "Continue"
 
 
 [retries]
