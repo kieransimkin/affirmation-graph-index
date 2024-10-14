@@ -47,7 +47,7 @@ router.post('/', async function(req, res, next) {
 
     }
     console.log([target,source])
-    const r1 = await driver.executeQuery(`
+    const  r1 = await driver.executeQuery(`
       MERGE (s:Wallet {stake: $source})
       MERGE (t:Wallet {stake: $target})
       MERGE (s)-[:AFFIRMS {txHash: $txHash }]->(t)
@@ -55,7 +55,7 @@ router.post('/', async function(req, res, next) {
        { source,target, txHash: req.body.transaction.hash },
        { database: 'neo4j' }
     )
-    console.log(r1);
+    console.log(r1.summary.counters.updates());
   } else { 
     console.log(req.body.transaction.outputs);
     for (var input of req.body.transaction.inputs) { 
@@ -66,7 +66,7 @@ router.post('/', async function(req, res, next) {
         {txHash: input.tx_id},
         { database: 'neo4j' }
       )
-      console.log(r1);
+      console.log(r1.summary.counters.updates());
       
     }
   } 
